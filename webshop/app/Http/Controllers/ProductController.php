@@ -16,7 +16,9 @@ class ProductController extends Controller
         $query = Product::query();
         $query->where('stock', '>', '0');
 
-        $query->where('product_type_id','like', '1');
+        //$query->where('product_type_id','like', '1');
+        $query->join('product_types', 'products.product_type_id', '=', 'product_types.id')
+              ->where('product_types.name', 'shoes');
 
         if($request->has('brand') && !empty($request->brand)){
             $query->where('brand', 'like', $request->brand);
@@ -44,7 +46,9 @@ class ProductController extends Controller
         $query = Product::query();
         $query->where('stock', '>', '0');
 
-        $query->where('product_type_id','like', '2');
+        //$query->where('product_type_id','like', '2');
+        $query->join('product_types', 'products.product_type_id', '=', 'product_types.id')
+            ->where('product_types.name', 'clothes');
 
         if($request->has('brand') && !empty($request->brand)){
             $query->where('brand', 'like', $request->brand);
